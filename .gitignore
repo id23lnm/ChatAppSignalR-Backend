@@ -29,3 +29,8 @@ game28.dta
 
 # Log files
 warnings.log
+
+.vs/
+bin/
+obj/
+node_modules/
