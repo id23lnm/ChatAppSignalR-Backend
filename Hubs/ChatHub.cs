@@ -27,5 +27,17 @@ namespace ChatApp.Hubs
         {
             await Clients.Group(chatRoom).SendAsync("ReceiveMessage", userName, message);
         }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            if (_sharedDb.Connection.TryGetValue(Context.ConnectionId, out var user))
+            {
+                await Clients.Group(user.ChatRoom).SendAsync("ReceiveMessage", "admin", $"{user.UserName} left");
+
+                _sharedDb.Connection.TryRemove(Context.ConnectionId, out _);
+            }
+
+            await base.OnDisconnectedAsync(exception);
+        }
     }
 }
