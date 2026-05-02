@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using ChatApp.DataService;
+using ChatApp.Models;
 
 namespace ChatApp.Hubs
 {
